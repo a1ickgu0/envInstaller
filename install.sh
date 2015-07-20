@@ -1,9 +1,9 @@
 #!/bin/sh
 
 if [ -f /etc/debian_version ]; then
-is_deb=0;
-else
 is_deb=1;
+else
+is_deb=0;
 fi
 
 install_tools( )
