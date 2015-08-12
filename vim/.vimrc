@@ -1,5 +1,5 @@
 " color theme download: http://www.cs.cmu.edu/~maverick/VimColorSchemeTest/index-c.html
-
+color darkZ
 syntax enable
 syntax on
 
