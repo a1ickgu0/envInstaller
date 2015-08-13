@@ -10,7 +10,6 @@ match Tabs "\t"
 
 set nocompatible
 set bsdir=buffer
-set autochdir
 set nu!
 set nuw=1
 set ruler
@@ -47,7 +46,7 @@ let g:winManagerWidth = 40
 
 filetype plugin indent on
 set completeopt=longest,menu
-set csprg=/usr/bin/cscope
+set csprg=cscope
 
 " enhance tag search
 set tags=./tags,./../tags,./**/tags
