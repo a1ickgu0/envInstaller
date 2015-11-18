@@ -8,8 +8,8 @@ fi
 
 install_tools( )
 {
-	if [ $is_deb == 1 ]; then 
-		apt-get -y install $2;
+	if [ $is_deb -eq 1 ]; then 
+		apt-get -y install $1;
 	else
 		yum -y install $1;
 	fi
