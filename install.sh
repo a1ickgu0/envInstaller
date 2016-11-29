@@ -28,6 +28,11 @@ if ! type tmux > /dev/null ; then
 	install_tools "tmux";
 fi
 
+if ! type make > /dev/null ; then
+	install_tools "build-essential libssl-dev libncurses5-dev unzip"
+fi
+
+
 #vim
 cp -Rf ./vim/.vimrc ~/
 cp -Rf ./vim/.vim ~/
