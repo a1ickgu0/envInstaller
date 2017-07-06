@@ -1,13 +1,7 @@
 " color theme download: http://www.cs.cmu.edu/~maverick/VimColorSchemeTest/index-c.html
+
+" General "{{{
 color darkZ
-syntax enable
-syntax on
-
-highlight Tabs ctermbg=1
-highlight Cursor guifg=red guibg=black
-
-match Tabs "\t"
-
 set nocompatible
 set bsdir=buffer
 set nu!
@@ -32,87 +26,123 @@ set lcs=tab:>-
 set fileencoding=gbk
 set fileencodings=ucs-bom,gbk,utf-8,default
 set foldmethod=marker
+set path=.
+set completeopt=longest,menu
+set csprg=/usr/bin/cscope
 
-" Tag list (ctags)
-" http://vim.sourceforge.net/scripts/script.php?script_id=273
+" enhance tag search
+set tags=./tags,./../tags,./**/tags
+
+
+let mapleader = ","
+
+syntax enable
+syntax on
+highlight Tabs ctermbg=1
+highlight Cursor guifg=red guibg=black
+
+match Tabs "\t"
+
+" Auto Filetype Setting
+autocmd FileType php set expandtab
+autocmd FileType c,cpp set expandtab
+
+"}}}
+
+" Vundle "{{{
+" Vundle command 
+" 		From Vim command line :BundleInstall
+" 		From Shell command: vim +BundleInstall +qall
+"
+" Vundle configure 
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" Vundle manage 
+Plugin 'VundleVim/Vundle.vim'
+
+" My Bundle List
+"  1. vim-scripts repos: repo_name 
+"     https://github.com/vim-scripts
+Plugin 'genutils'
+Plugin 'taglist.vim'
+Plugin 'lookupfile'
+Plugin 'cscope_macros.vim'
+Plugin 'echofunc.vim'
+Plugin 'SrcExpl'
+Plugin 'SuperTab'
+Plugin 'Mark'
+"Plugin 'gtags-cscope.vim'
+
+"  2. original repos from github: username/repo_name
+Plugin 't9md/vim-quickhl'
+
+"  3. custom repos
+Plugin 'bufexplorer.zip'
+Plugin 'winmanager'
+
+call vundle#end()
+
+filetype plugin indent on
+
+" Vundle End
+" ===========================================================================
+""}}}
+
+
+" Plugin taglist
 let Tlist_Ctags_Cmd = '/usr/bin/ctags'
 let Tlist_Auto_Open = 0
 let Tlist_Show_One_File = 1
 let Tlist_Exit_OnlyWindow = 1
 let Tlist_Show_Menu = 1
 
+" lookupfile
+
+
+" Plugin winmanager
 let g:winManagerWindowLayout='FileExplorer|TagList'
 let g:winManagerWidth = 40
 
-filetype plugin indent on
-set completeopt=longest,menu
-set csprg=cscope
-
-" enhance tag search
-set tags=./tags,./../tags,./**/tags
-
-" echofun.vim
-" script update:http://www.vim.org/scripts/script.php?script_id=1736
-
-" bufexplorer.vim
-" script update:http://www.vim.org/scripts/script.php?script_id=42
+" Plugin bufexplorer
 let g:bufExplorerShowDirectories=1
 let g:bufExplorerShowRelativePath=1
 
-" supertab.vim
-" script update:http://www.vim.org/scripts/script.php?script_id=182
-let mapleader = ","
+" SrcExpl
+let g:SrcExpl_RefreshTime   = 2 			" Set the refreshing time interval, such as 2 seconds
+let g:SrcExpl_WinHeight     = 12 			" Initialize the height of the Source Explorer window
+let g:SrcExpl_RefreshMapKey = "<Space>" 	" Make your own map key to force to do a refreshing
+let g:SrcExpl_GoBackMapKey  = "<C-b>" 		" Make your own map key for 'SrcExplGoBack' operation
+let g:SrcExpl_pluginList = [ 
+        \ "__Tag_List__", 
+        \ "_NERD_tree_" 
+    \ ]
+let g:SrcExpl_searchLocalDef = 1 			" Enable Local Search
+let g:SrcExpl_isUpdateTags = 0 				" Do not let the Source Explorer update the tags file when opening
+" // Use 'Exuberant Ctags' with '--sort=foldcase -R .' or '-L cscope.files' to 
+" // create/update the tags file 
+let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R ." 
+" // Set "<F12>" key for updating the tags file artificially 
+let g:SrcExpl_updateTagsKey = "<F12>" 
+" // Set "<F3>" key for displaying the previous definition in the jump list 
+let g:SrcExpl_prevDefKey = "<F3>" 
+" // Set "<F4>" key for displaying the next definition in the jump list 
+let g:SrcExpl_nextDefKey = "<F4>" 
 
-" mark.vim
-" http://www.vim.org/scripts/script.php?script_id=1238
-
-" srcexpl.vim
-" http://www.vim.org/scripts/script.php?script_id=2179
-" Set the refreshing time interval, such as 2 seconds
-let g:SrcExpl_RefreshTime   = 2
-" Initialize the height of the Source Explorer window
-let g:SrcExpl_WinHeight     = 12
-" Make your own map key to force to do a refreshing
-let g:SrcExpl_RefreshMapKey = "<Space>"
-" Make your own map key for 'SrcExplGoBack' operation
-let g:SrcExpl_GoBackMapKey  = "<C-b>"
 " Doxygen Configure 
 let g:DoxygenToolkit_paramTag_pre="@Param " 
 let g:DoxygenToolkit_returnTag="@Returns   " 
 let g:DoxygenToolkit_authorName="Alick" 
 let g:DoxygenToolkit_licenseTag="My own license"
 
-" Key mapping
-nmap <silent> wm :WMToggle<CR>
-nmap <silent> wb :BufExplorer<CR>
-
-" iabbrev functions defins
-fun! Eatchar(pat)
-    let s:c = nr2char(getchar())
-    return (s:c =~ a:pat) ? '' : s:c
-endfun
-fun! <SID>iabbrev_lang_c()
-    iabbrev <buffer> #i #include <>/<LEFT>
-    iabbrev <buffer> #d #define
-endfun
-
-" Fast reloading of the .vimrc
-map <silent> <leader>sc :source ~/.vimrc<cr>
-" Fast editing of .vimrc
-map <silent> <leader>ec :e ~/.vimrc<cr>
-
-" session configure
-set path=.
-map <silent> <leader>mm :mksession! wk.vim<cr>
-if filereadable("wk.vim")
-    source wk.vim
-endif
 
 " ============================================================================================
 " cscope config
-if filereadable("cscope.out")
-    cs add cscope.out
-endif
+"if filereadable("cscope.out")
+"    cs add cscope.out
+"endif
+
 if has('cscope')
 	set cscopetag cscopeverbose
 	if has('quickfix')
@@ -125,18 +155,10 @@ if has('cscope')
 	cnoreabbrev css cs show
 	cnoreabbrev csh cs help
 	command -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
-	nmap <C-@>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-	nmap <C-@>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-	nmap <C-@>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-	nmap <C-@>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-	nmap <C-@>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-	nmap <C-@>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-	nmap <C-@>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-	nmap <C-@>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 endif
 
 " Lookupfile
-let g:LookupFile_MinPatLength = 2
+let g:LookupFile_MinPatLength = 4
 let g:LookupFile_PreserveLastPattern = 0
 let g:LookupFile_PreservePatternHistory = 1
 let g:LookupFile_AlwaysAcceptFirst = 1
@@ -146,29 +168,56 @@ if filereadable("./filenametags")
 	let g:LookupFile_TagExpr = '"./filenametags"'
 endif
 
-nmap <leader>o :LUTags<CR>
-nmap <leader>b :LUBufs<CR>
-nmap <leader>t :LUWalk<CR>
+" Key mapping "{{{
+" Fast reloading of the .vimrc
+map <silent> <leader>sc :source ~/.vimrc<cr>
+" Fast editing of .vimrc
+map <silent> <leader>ec :e ~/.vimrc<cr>
+" session configure
+map <silent> <leader>mm :mksession! wk.vim<cr>
+" LookupFile
+nmap <F7> :LookupFile<CR>
 
-autocmd FileType php set expandtab
-autocmd FileType c,cpp set expandtab
-
+" File Type mapping "{{{
 autocmd FileType c,cpp nmap <silent> wt  :tselect<CR>
 autocmd FileType c,cpp nmap <silent> wtr :tprevious<CR>
 autocmd FileType c,cpp nmap <silent> wtn :tnext <CR>
-
 autocmd FileType c,cpp nmap <s-left> <C-W><
 autocmd FileType c,cpp nmap <s-right> <C-W>>
 autocmd FileType c,cpp nmap <s-up> <C-W>+
 autocmd FileType c,cpp nmap <s-down> <C-W>-
-autocmd FileType c,cpp: call <SID>iabbrev_lang_c()
 
 " Function Key remap
-autocmd FileType c,cpp nmap <F2> :clist<CR>
-autocmd FileType c,cpp nmap <F3> :cprev<CR>
-autocmd FileType c,cpp nmap <F4> :cnext<CR>
-autocmd FileType c,cpp nmap <F7> :LUTags<CR>
 autocmd FileType c,cpp nmap <F10> :SrcExplToggle<CR>
+
+" Cscope 
+if has('cscope')
+	autocmd FileType c,cpp nmap <C-2>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+	autocmd FileType c,cpp nmap <C-2>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+	autocmd FileType c,cpp nmap <C-2>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+	autocmd FileType c,cpp nmap <C-2>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+	autocmd FileType c,cpp nmap <C-2>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+	autocmd FileType c,cpp nmap <C-2>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+	autocmd FileType c,cpp nmap <C-2>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+	autocmd FileType c,cpp nmap <C-2>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+	autocmd FileType c,cpp nmap <C-p> :cprev <C-R> <CR><CR>
+	autocmd FileType c,cpp nmap <C-n> :cnext <C-R> <CR><CR>
+endif
+""}}} /// End File Type mapping
+
+" Plugin command mapping "{{{
+" Plugin Winmanager 
+nmap <silent> wm :WMToggle<CR>
+" Plugin bufexplorer
+nmap <silent> wb :BufExplorer<CR>
+" Plugin Lookupfile
+nmap <leader>o :LUTags<CR>
+nmap <leader>b :LUBufs<CR>
+nmap <leader>t :LUWalk<CR>
+
+""}}} /// End Plugin command mapping
+
+""}}} /// End Keymapping
 
 " tools configure
 "
@@ -186,4 +235,10 @@ if exists('$ITERM_PROFILE')
 		let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 	endif
 end
+
+" Vim session file
+if filereadable("wk.vim")
+    source wk.vim
+endif
+
 

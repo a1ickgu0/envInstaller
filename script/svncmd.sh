@@ -16,21 +16,20 @@ case $1 in
 	;;
 
 	"touch")
-		# touch all modify file 
+		# touch all modify file
 		echo "touch all modify file"
 		svn st | grep ^M | awk '{print "touch " $2}' | bash
 	;;
 
 	"revert")
-		# touch all modify file 
+		# touch all modify file
 		echo "revert all modify file"
 		svn st | grep ^M | awk '{print "svn revert " $2}' | bash
 		;;
 
 	*)
 	echo "Error command!"
-	echo "    Useage: svn.tools [add|del|touch|revert]";
+	echo "    Useage: $0 [add|del|touch|revert]";
 	;;
 
 esac
-
