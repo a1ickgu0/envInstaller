@@ -51,8 +51,8 @@ autocmd FileType c,cpp set expandtab
 
 " Vundle "{{{
 " Vundle command 
-" 		From Vim command line :BundleInstall
-" 		From Shell command: vim +BundleInstall +qall
+" 		From Vim command line :PluginInstall
+" 		From Shell command: vim +PluginInstall +qall
 "
 " Vundle configure 
 filetype off
