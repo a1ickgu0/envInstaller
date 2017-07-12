@@ -15,6 +15,10 @@ install_tools( )
 	fi
 }
 
+#Init submodule
+git submodule init
+git submodule update
+
 #Install tools
 if ! type vim > /dev/null ; then
 	install_tools "vim";
@@ -32,10 +36,10 @@ if ! type make > /dev/null ; then
 	install_tools "build-essential libssl-dev libncurses5-dev unzip"
 fi
 
-
 #vim
 cp -Rf ./vim/.vimrc ~/
 cp -Rf ./vim/.vim ~/
+vim +PluginInstall +qall
 
 #tmux
 cp -f ./tmux/.tmux.conf ~/
