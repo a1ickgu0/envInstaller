@@ -1,6 +1,5 @@
 #!/bin/sh
 
-
 case $1 in
 
 	"add")
@@ -27,9 +26,31 @@ case $1 in
 		svn st | grep ^M | awk '{print "svn revert " $2}' | bash
 		;;
 
+	"all")
+		cur=`pwd`
+		case $2 in
+			"update")
+				echo "update all svn repo from directory:$cur"
+				cmd="svn up"
+				;;
+			"revision")
+				cmd="svn info | grep Revision"
+				echo "show all svn repo from directory:$cur"
+				;;
+		esac
+
+		for d in `ls -d */`
+		do
+			if [ -d "$d.svn" ]; then
+				echo "enter directory $d"
+				echo "cd $d; $cmd; cd $cur" | bash
+			fi
+		done
+		;;
+
 	*)
 	echo "Error command!"
-	echo "    Useage: $0 [add|del|touch|revert]";
+	echo "    Useage: $0 [add|del|touch|revert|update-all]";
 	;;
 
 esac
