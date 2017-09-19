@@ -50,26 +50,25 @@ autocmd FileType c,cpp set expandtab
 "}}}
 
 " Vundle "{{{
-" Vundle command 
+" Vundle command
 " 		From Vim command line :PluginInstall
 " 		From Shell command: vim +PluginInstall +qall
 "
-" Vundle configure 
+" Vundle configure
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" Vundle manage 
+" Vundle manage
 Plugin 'VundleVim/Vundle.vim'
 
 " My Bundle List
-"  1. vim-scripts repos: repo_name 
+"  1. vim-scripts repos: repo_name
 "     https://github.com/vim-scripts
 Plugin 'genutils'
 Plugin 'taglist.vim'
 Plugin 'lookupfile'
 Plugin 'cscope_macros.vim'
-Plugin 'echofunc.vim'
 Plugin 'SrcExpl'
 Plugin 'SuperTab'
 Plugin 'Mark'
@@ -114,26 +113,26 @@ let g:SrcExpl_RefreshTime   = 2 			" Set the refreshing time interval, such as 2
 let g:SrcExpl_WinHeight     = 12 			" Initialize the height of the Source Explorer window
 let g:SrcExpl_RefreshMapKey = "<Space>" 	" Make your own map key to force to do a refreshing
 let g:SrcExpl_GoBackMapKey  = "<C-b>" 		" Make your own map key for 'SrcExplGoBack' operation
-let g:SrcExpl_pluginList = [ 
-        \ "__Tag_List__", 
-        \ "_NERD_tree_" 
+let g:SrcExpl_pluginList = [
+        \ "__Tag_List__",
+        \ "_NERD_tree_"
     \ ]
 let g:SrcExpl_searchLocalDef = 1 			" Enable Local Search
 let g:SrcExpl_isUpdateTags = 0 				" Do not let the Source Explorer update the tags file when opening
-" // Use 'Exuberant Ctags' with '--sort=foldcase -R .' or '-L cscope.files' to 
-" // create/update the tags file 
-let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R ." 
-" // Set "<F12>" key for updating the tags file artificially 
-let g:SrcExpl_updateTagsKey = "<F12>" 
-" // Set "<F3>" key for displaying the previous definition in the jump list 
-let g:SrcExpl_prevDefKey = "<F3>" 
-" // Set "<F4>" key for displaying the next definition in the jump list 
-let g:SrcExpl_nextDefKey = "<F4>" 
+" // Use 'Exuberant Ctags' with '--sort=foldcase -R .' or '-L cscope.files' to
+" // create/update the tags file
+let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R ."
+" // Set "<F12>" key for updating the tags file artificially
+let g:SrcExpl_updateTagsKey = "<F12>"
+" // Set "<F3>" key for displaying the previous definition in the jump list
+let g:SrcExpl_prevDefKey = "<F3>"
+" // Set "<F4>" key for displaying the next definition in the jump list
+let g:SrcExpl_nextDefKey = "<F4>"
 
-" Doxygen Configure 
-let g:DoxygenToolkit_paramTag_pre="@Param " 
-let g:DoxygenToolkit_returnTag="@Returns   " 
-let g:DoxygenToolkit_authorName="Alick" 
+" Doxygen Configure
+let g:DoxygenToolkit_paramTag_pre="@Param "
+let g:DoxygenToolkit_returnTag="@Returns   "
+let g:DoxygenToolkit_authorName="Alick"
 let g:DoxygenToolkit_licenseTag="My own license"
 
 
@@ -190,7 +189,7 @@ autocmd FileType c,cpp nmap <s-down> <C-W>-
 " Function Key remap
 autocmd FileType c,cpp nmap <F10> :SrcExplToggle<CR>
 
-" Cscope 
+" Cscope
 if has('cscope')
 	autocmd FileType c,cpp nmap <C-2>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 	autocmd FileType c,cpp nmap <C-2>g :cs find g <C-R>=expand("<cword>")<CR><CR>
@@ -206,7 +205,7 @@ endif
 ""}}} /// End File Type mapping
 
 " Plugin command mapping "{{{
-" Plugin Winmanager 
+" Plugin Winmanager
 nmap <silent> wm :WMToggle<CR>
 " Plugin bufexplorer
 nmap <silent> wb :BufExplorer<CR>
@@ -227,7 +226,7 @@ endif
 
 " Static cursor shape
 if exists('$ITERM_PROFILE')
-	if exists('$TMUX') 
+	if exists('$TMUX')
 		let &t_SI = "\<Esc>[3 q"
 		let &t_EI = "\<Esc>[0 q"
 	else
@@ -240,5 +239,3 @@ end
 if filereadable("wk.vim")
     source wk.vim
 endif
-
-
