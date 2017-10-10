@@ -1,17 +1,18 @@
 #!/bin/sh
 
-if [ -f /etc/debian_version ]; then
-is_deb=1;
-else
-is_deb=0;
-fi
+# Install tools
+YUM_CMD=$(command -v yum)
+APT_CMD=$(command -v apt-get)
+BREW_CMD=$(command -v brew)
 
 install_tools( )
 {
-	if [ $is_deb -eq 1 ]; then 
-		apt-get -y install $1;
-	else
+	if [ -n "${YUM_CMD}" ]; then
 		yum -y install $1;
+	elif [ -n "${APT_CMD}" ]; then
+		apt-get -y install $1;
+	elif [ -n "${BREW_CMD}" ]; then
+		brew install $1;
 	fi
 }
 
@@ -53,5 +54,3 @@ cp -f ./subversion/config ~/.subversion
 
 #git
 cp -f ./git/.gitconfig ~/
-
-
