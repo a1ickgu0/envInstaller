@@ -8,9 +8,9 @@ BREW_CMD=$(command -v brew)
 install_tools( )
 {
 	if [ -n "${YUM_CMD}" ]; then
-		yum -y install $1;
+		sudo yum -y install $1;
 	elif [ -n "${APT_CMD}" ]; then
-		apt-get -y install $1;
+		sudo apt-get -y install $1;
 	elif [ -n "${BREW_CMD}" ]; then
 		brew install $1;
 	fi
