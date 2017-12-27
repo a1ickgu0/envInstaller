@@ -37,6 +37,13 @@ if ! type make > /dev/null ; then
 	install_tools "build-essential libssl-dev libncurses5-dev unzip"
 fi
 
+#Install Package
+if ! type pip > /dev/null; then
+	 wget https://bootstrap.pypa.io/get-pip.py
+	 sudo python ./get-pip.py
+	 rm ./get-pip.py
+fi
+
 #vim
 cp -Rf ./vim/.vimrc ~/
 cp -Rf ./vim/.vim ~/

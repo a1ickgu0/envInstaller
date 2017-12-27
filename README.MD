@@ -9,17 +9,15 @@ Run `install.sh` with root privilege in `envInstaller` directory, the  script wi
 
 * vim
 * tmux
-* git 
+* git
 * subversion
+* pip
 
-Note: Only support apt & yum to install missing tools, because I only work in Debain(Ubuntu) and CentOS.
+Note: Only support apt & yum to install missing tools, because I only work in Debain(Ubuntu), CentOS and OS X(Homebrew).
 
 ### Custom configuration files
 
 After script please replace some personal info such as account or email in follow configure file:
 
-* git/.gitconfig, `name` and `email` in user section 
+* git/.gitconfig, `name` and `email` in user section
 * vim/.vimrc, `g:DoxygenToolkit_authorName` and `g:DoxygenToolkit_licenseTag`
-
-
-
