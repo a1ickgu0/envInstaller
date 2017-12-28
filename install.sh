@@ -39,9 +39,7 @@ fi
 
 #Install Package
 if ! type pip > /dev/null; then
-	 wget https://bootstrap.pypa.io/get-pip.py
-	 sudo python ./get-pip.py
-	 rm ./get-pip.py
+	install_tools "python-pip"
 fi
 
 #vim
